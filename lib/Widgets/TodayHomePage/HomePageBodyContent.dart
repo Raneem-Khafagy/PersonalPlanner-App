@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'HomePageBodyContent/CircularTodayDate.dart';
 import 'HomePageBodyContent/bla.dart';
 
 class HomePageBodyContent extends StatelessWidget {
@@ -16,11 +17,14 @@ class HomePageBodyContent extends StatelessWidget {
           // mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            CircularProgress(),
             SizedBox(
               height: height * .02,
             ),
-            Instructions(),
+            CircularTodayDate(height: height, width: width),
+            SizedBox(
+              height: height * .02,
+            ),
+            // NotesList(),
           ],
         ),
       ),

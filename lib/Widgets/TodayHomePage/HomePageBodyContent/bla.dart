@@ -1,125 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-
-class CircularProgress extends StatelessWidget {
-  final int progress = 61;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Container(
-          width: 151,
-          height: 151,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black38,
-                offset: Offset(0, 1),
-                blurRadius: 9.0,
-              ),
-            ],
-          ),
-          padding: EdgeInsets.all(11.0),
-          child: CustomPaint(
-            foregroundPainter: new MyPainter(
-              completeColor: Colors.cyan,
-              completePercent: progress.toDouble(),
-              width: 9.0,
-            ),
-            child: Center(
-              child: Container(
-                margin: EdgeInsets.all(17),
-                child: FittedBox(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Hamper",
-                        style: TextStyle(
-                          color: Colors.grey[400],
-                          fontSize: 31,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                      SizedBox(height: 11),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "$progress",
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 61,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "%",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 31,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 11),
-                      Text(
-                        "FULL",
-                        style: TextStyle(
-                          color: Colors.cyan,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 21,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: 11,
-              width: 11,
-              margin: EdgeInsets.only(right: 11.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.blue,
-              ),
-            ),
-            Container(
-              height: 11,
-              width: 11,
-              margin: EdgeInsets.only(right: 11.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey[300],
-              ),
-            ),
-            Container(
-              height: 11,
-              width: 11,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey[300],
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
 
 class MyPainter extends CustomPainter {
   Color lineColor;
@@ -152,7 +32,7 @@ class MyPainter extends CustomPainter {
   }
 }
 
-class Instructions extends StatelessWidget {
+class NotesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
