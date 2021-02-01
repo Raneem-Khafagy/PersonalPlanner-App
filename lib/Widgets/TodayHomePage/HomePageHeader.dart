@@ -1,11 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myplanner/Controllers/Provider/Themes.dart';
+import 'package:provider/provider.dart';
 
 class HomePageHeader extends StatelessWidget {
-  final height, width;
-  const HomePageHeader({Key key, this.height, this.width}) : super(key: key);
-
+  var currentDate = DateTime.now();
+  DateTime selectedDate;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
+    void _datePicker() {
+      showDatePicker(
+        context: context,
+        initialDate: currentDate,
+        lastDate: DateTime(2030),
+        firstDate: DateTime(1999),
+      ).then((value) {
+        if (value == null) return;
+      });
+    }
+
     return Container(
       child: Flexible(
         flex: 1,
@@ -19,16 +35,15 @@ class HomePageHeader extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   Icons.calendar_today,
-                  color: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: _datePicker,
               ),
               IconButton(
-                icon: Icon(
-                  Icons.color_lens,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
+                icon: Icon(themeNotifier.iconTheme),
+                onPressed: () {
+                  themeNotifier.darkorlight = !(themeNotifier.darkorlight);
+                  themeNotifier.setTheme(themeNotifier.darkorlight);
+                },
               ),
             ],
           ),

@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:myplanner/Widgets/TodayHomePage/CircularTodayDate.dart';
 
 class HomePageBodyContainer extends StatelessWidget {
-  final height, width;
-  const HomePageBodyContainer({Key key, this.height, this.width})
-      : super(key: key);
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Container(
       child: Flexible(
         flex: 7,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.elliptical(261, 51),
-              topRight: Radius.elliptical(261, 51),
+              topLeft: Radius.elliptical(
+                height * .3,
+                width * .13,
+              ),
+              topRight: Radius.elliptical(
+                height * .3,
+                width * .13,
+              ),
             ),
           ),
         ),

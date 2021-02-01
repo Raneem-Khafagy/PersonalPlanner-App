@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 //screens
 import 'Views/Screens/TodayHomePage.dart';
+import 'Controllers/Provider/Themes.dart';
 
-void main() => runApp(ToDoActivity());
+void main() {
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<ThemeNotifier>(create: (_) => ThemeNotifier()),
+  ], child: MyPlanner()));
+}
 
-class ToDoActivity extends StatelessWidget {
+class MyPlanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Covid 19',
+      title: 'MyPlanner',
+      theme: themeNotifier.themeData,
       routes: {
         '/TodayHomePage': (context) => TodayHomePage(),
       },
