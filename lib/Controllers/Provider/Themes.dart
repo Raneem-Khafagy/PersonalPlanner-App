@@ -25,7 +25,7 @@ class ThemeNotifier with ChangeNotifier {
     backgroundColor: const Color(0xFFE5E5E5),
     accentColor: Colors.black,
     accentIconTheme: IconThemeData(color: Colors.white),
-    dividerColor: Colors.white54,
+    dividerColor: Colors.grey[350],
     secondaryHeaderColor: Colors.grey[400],
     shadowColor: Colors.black38,
   );

@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:myplanner/Views/Screens/AddNewNote.dart';
 
 class CircularTodayDate extends StatelessWidget {
   final String date = DateFormat.yMMMMd('en_US').format(DateTime.now());
@@ -26,7 +27,8 @@ class CircularTodayDate extends StatelessWidget {
               ),
             ],
           ),
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.symmetric(
+              horizontal: width * .014, vertical: height * .007),
           child: Center(
             child: Container(
               margin: EdgeInsets.all(8),
@@ -39,10 +41,11 @@ class CircularTodayDate extends StatelessWidget {
                       style: TextStyle(
                         color: Theme.of(context).accentColor,
                         fontSize: 61,
+                        //fontSize: height * 0.09,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 11),
+                    SizedBox(height: height * 0.01),
                     Text(
                       date,
                       style: TextStyle(
@@ -63,10 +66,11 @@ class CircularTodayDate extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            AddNewWidget(
-              width: width,
-              height: height,
-              typeofAdd: "Add new note",
+            Container(
+              width: width * .4,
+              child: AddNewWidgetButton(
+                typeofAdd: 'new note',
+              ),
             ),
             AddNewWidget(
               width: width,
@@ -98,7 +102,6 @@ class AddNewWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           horizontal: width * .03, vertical: height * .007),
       decoration: BoxDecoration(
-        //color: Color(0xCFBDBEC0),
         color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(15.0),
       ),
