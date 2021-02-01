@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myplanner/Views/Screens/AddNewNote.dart';
-import 'package:myplanner/Widgets/AddNew/Note.dart';
-import 'package:myplanner/Widgets/TodayHomePage/CircularTodayDate.dart';
-
-import '../../TRIAL.dart';
 
 class HomePageBodyContent extends StatelessWidget {
   final headLineController = TextEditingController();
@@ -19,17 +14,12 @@ class HomePageBodyContent extends StatelessWidget {
           width: width,
           height: height * .7,
           child: ListView(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(18),
             children: [
-              //AddNewNoteTextField(),
-              AddNewWidgetButton(
-                typeofAdd: 'new note',
-              ),
               SizedBox(
                 height: 16,
               ),
 
-              Note(),
               //AddNewNoteTextField(),
             ],
           ),

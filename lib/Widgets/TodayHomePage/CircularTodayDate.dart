@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:myplanner/Views/Screens/AddNewNote.dart';
+import 'package:myplanner/Widgets/AddNew/AddNewNote.dart';
 
 class CircularTodayDate extends StatelessWidget {
   final String date = DateFormat.yMMMMd('en_US').format(DateTime.now());
@@ -72,11 +72,17 @@ class CircularTodayDate extends StatelessWidget {
                 typeofAdd: 'new note',
               ),
             ),
-            AddNewWidget(
-              width: width,
-              height: height,
-              typeofAdd: "Add new task",
+            Container(
+              width: width * .4,
+              child: AddNewWidgetButton(
+                typeofAdd: 'new task',
+              ),
             ),
+            // AddNewWidget(
+            //   width: width,
+            //   height: height,
+            //   typeofAdd: "Add new task",
+            // ),
           ],
         ),
       ],
