@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myplanner/Widgets/AddNew/AddNewTask.dart';
 
 class AddNewNoteButton extends StatelessWidget {
   const AddNewNoteButton({Key key, this.typeofAdd, this.iconofAdd})
@@ -92,17 +93,28 @@ class AddNewNoteButton extends StatelessWidget {
                 SizedBox(
                   height: height * 0.01,
                 ),
-                AnimatedButton(
-                    isFixedWidth: false,
-                    buttonTextStyle: TextStyle(
-                        color: Theme.of(context).accentColor, fontSize: 14),
-                    buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        color: Theme.of(context).dividerColor),
-                    text: 'Close',
-                    pressEvent: () {
-                      dialog.dissmiss();
-                    }),
+                Row(
+                  children: [
+                    ActionButton(
+                      dialog: dialog,
+                      eventOnTap: () {
+                        dialog.dissmiss();
+                      },
+                      textShown: 'save',
+                      width: width,
+                      height: height,
+                    ),
+                    ActionButton(
+                      dialog: dialog,
+                      eventOnTap: () {
+                        dialog.dissmiss();
+                      },
+                      textShown: 'Close',
+                      width: width,
+                      height: height,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

@@ -71,7 +71,6 @@ class AddNewTaskButton extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 SizedBox(
                   height: height * 0.01,
                 ),
@@ -93,26 +92,19 @@ class AddNewTaskButton extends StatelessWidget {
                 SizedBox(
                   height: height * 0.01,
                 ),
-                // SaveAndCancelWidget(
-                //   dialog: dialog,
-                //   eventOnPress: () {
-                //     dialog.dissmiss();
-                //   },
-                //   textShown: 'Close',
-                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SaveAndCancelButton(
+                    ActionButton(
                       dialog: dialog,
                       eventOnTap: () {
                         dialog.dissmiss();
                       },
-                      textShown: 'Close',
+                      textShown: 'Add new task',
                       width: width,
                       height: height,
                     ),
-                    SaveAndCancelButton(
+                    ActionButton(
                       dialog: dialog,
                       eventOnTap: () {
                         dialog.dissmiss();
@@ -123,6 +115,20 @@ class AddNewTaskButton extends StatelessWidget {
                     ),
                   ],
                 ),
+                Container(
+                  margin: EdgeInsets.only(top: height * .01),
+                  child: AnimatedButton(
+                      isFixedWidth: false,
+                      buttonTextStyle: TextStyle(
+                          color: Theme.of(context).accentColor, fontSize: 14),
+                      buttonDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          color: Theme.of(context).dividerColor),
+                      text: 'Close',
+                      pressEvent: () {
+                        dialog.dissmiss();
+                      }),
+                ),
               ],
             ),
           ),
@@ -132,8 +138,8 @@ class AddNewTaskButton extends StatelessWidget {
   }
 }
 
-class SaveAndCancelButton extends StatelessWidget {
-  const SaveAndCancelButton({
+class ActionButton extends StatelessWidget {
+  const ActionButton({
     Key key,
     @required this.dialog,
     @required this.textShown,
@@ -149,52 +155,28 @@ class SaveAndCancelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:
-          EdgeInsets.symmetric(horizontal: width * .05, vertical: height * .01),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(100)),
-          color: Theme.of(context).dividerColor),
-      child: GestureDetector(
-        onTap: eventOnTap,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              textShown,
-              style:
-                  TextStyle(color: Theme.of(context).accentColor, fontSize: 14),
-            ),
-          ],
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: width * .02),
+        padding: EdgeInsets.symmetric(
+            horizontal: width * .05, vertical: height * .02),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+            color: Theme.of(context).dividerColor),
+        child: GestureDetector(
+          onTap: eventOnTap,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                textShown,
+                style: TextStyle(
+                    color: Theme.of(context).accentColor, fontSize: 14),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-// class SaveAndCancelWidget extends StatelessWidget {
-//   const SaveAndCancelWidget({
-//     Key key,
-//     @required this.dialog,
-//     @required this.textShown,
-//     @required this.eventOnPress,
-//   }) : super(key: key);
-
-//   final AwesomeDialog dialog;
-//   final String textShown;
-//   final Function eventOnPress;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AnimatedButton(
-//       isFixedWidth: false,
-//       buttonTextStyle:
-//           TextStyle(color: Theme.of(context).accentColor, fontSize: 14),
-//       buttonDecoration: BoxDecoration(
-//           borderRadius: BorderRadius.all(Radius.circular(100)),
-//           color: Theme.of(context).dividerColor),
-//       text: textShown,
-//       pressEvent: eventOnPress,
-//     );
-//   }
-// }
