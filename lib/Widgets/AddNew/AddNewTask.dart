@@ -2,8 +2,8 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AddNewNoteButton extends StatelessWidget {
-  const AddNewNoteButton({Key key, this.typeofAdd, this.iconofAdd})
+class AddNewTaskButton extends StatelessWidget {
+  const AddNewTaskButton({Key key, this.typeofAdd, this.iconofAdd})
       : super(key: key);
   final String typeofAdd;
   final iconofAdd;
@@ -71,6 +71,7 @@ class AddNewNoteButton extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 SizedBox(
                   height: height * 0.01,
                 ),
@@ -84,7 +85,7 @@ class AddNewNoteButton extends StatelessWidget {
                     maxLines: null,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      labelText: 'Description',
+                      labelText: 'task',
                       prefixIcon: Icon(Icons.text_fields),
                     ),
                   ),
@@ -92,17 +93,36 @@ class AddNewNoteButton extends StatelessWidget {
                 SizedBox(
                   height: height * 0.01,
                 ),
-                AnimatedButton(
-                    isFixedWidth: false,
-                    buttonTextStyle: TextStyle(
-                        color: Theme.of(context).accentColor, fontSize: 14),
-                    buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        color: Theme.of(context).dividerColor),
-                    text: 'Close',
-                    pressEvent: () {
-                      dialog.dissmiss();
-                    }),
+                // SaveAndCancelWidget(
+                //   dialog: dialog,
+                //   eventOnPress: () {
+                //     dialog.dissmiss();
+                //   },
+                //   textShown: 'Close',
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SaveAndCancelButton(
+                      dialog: dialog,
+                      eventOnTap: () {
+                        dialog.dissmiss();
+                      },
+                      textShown: 'Close',
+                      width: width,
+                      height: height,
+                    ),
+                    SaveAndCancelButton(
+                      dialog: dialog,
+                      eventOnTap: () {
+                        dialog.dissmiss();
+                      },
+                      textShown: 'save',
+                      width: width,
+                      height: height,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -111,3 +131,70 @@ class AddNewNoteButton extends StatelessWidget {
     );
   }
 }
+
+class SaveAndCancelButton extends StatelessWidget {
+  const SaveAndCancelButton({
+    Key key,
+    @required this.dialog,
+    @required this.textShown,
+    @required this.eventOnTap,
+    @required this.width,
+    @required this.height,
+  }) : super(key: key);
+  final AwesomeDialog dialog;
+  final String textShown;
+  final Function eventOnTap;
+  final double width;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding:
+          EdgeInsets.symmetric(horizontal: width * .05, vertical: height * .01),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(100)),
+          color: Theme.of(context).dividerColor),
+      child: GestureDetector(
+        onTap: eventOnTap,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              textShown,
+              style:
+                  TextStyle(color: Theme.of(context).accentColor, fontSize: 14),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// class SaveAndCancelWidget extends StatelessWidget {
+//   const SaveAndCancelWidget({
+//     Key key,
+//     @required this.dialog,
+//     @required this.textShown,
+//     @required this.eventOnPress,
+//   }) : super(key: key);
+
+//   final AwesomeDialog dialog;
+//   final String textShown;
+//   final Function eventOnPress;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedButton(
+//       isFixedWidth: false,
+//       buttonTextStyle:
+//           TextStyle(color: Theme.of(context).accentColor, fontSize: 14),
+//       buttonDecoration: BoxDecoration(
+//           borderRadius: BorderRadius.all(Radius.circular(100)),
+//           color: Theme.of(context).dividerColor),
+//       text: textShown,
+//       pressEvent: eventOnPress,
+//     );
+//   }
+// }

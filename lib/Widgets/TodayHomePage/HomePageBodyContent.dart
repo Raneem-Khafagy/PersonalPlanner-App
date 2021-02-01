@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myplanner/Widgets/AddNew/AddNewNote.dart';
 
 class HomePageBodyContent extends StatelessWidget {
   final headLineController = TextEditingController();
@@ -19,8 +20,6 @@ class HomePageBodyContent extends StatelessWidget {
               SizedBox(
                 height: 16,
               ),
-
-              //AddNewNoteTextField(),
             ],
           ),
         ),
