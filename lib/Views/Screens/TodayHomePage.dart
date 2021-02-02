@@ -1,3 +1,4 @@
+import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:myplanner/Widgets/TodayHomePage/CircularTodayDate.dart';
 
@@ -5,8 +6,9 @@ import 'package:myplanner/Widgets/TodayHomePage/CircularTodayDate.dart';
 //homepage
 
 import 'package:myplanner/Widgets/TodayHomePage/HomePageBodyContainer.dart';
-import 'package:myplanner/Widgets/TodayHomePage/HomePageBodyContent.dart';
+
 import 'package:myplanner/Widgets/TodayHomePage/HomePageHeader.dart';
+import 'package:myplanner/Widgets/note.dart';
 
 class TodayHomePage extends StatelessWidget {
   @override
@@ -24,7 +26,13 @@ class TodayHomePage extends StatelessWidget {
             ],
           ),
           CircularTodayDate(),
-          HomePageBodyContent(),
+          // Note(
+          //   height: height,
+          //   width: width,
+          //   title: 'Title',
+          //   description:
+          //       'description goes over here ! description goes over here !description goes over here !description goes over here !description goes over here !description goes over here !',
+          // ),
         ],
       ),
     );

@@ -74,21 +74,7 @@ class AddNewTaskButton extends StatelessWidget {
                 SizedBox(
                   height: height * 0.01,
                 ),
-                Material(
-                  elevation: 0,
-                  color: Colors.blueGrey.withAlpha(40),
-                  child: TextFormField(
-                    autofocus: true,
-                    keyboardType: TextInputType.multiline,
-                    maxLengthEnforced: true,
-                    maxLines: null,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: 'task',
-                      prefixIcon: Icon(Icons.text_fields),
-                    ),
-                  ),
-                ),
+                // buildAddTaskWidget(context),
                 SizedBox(
                   height: height * 0.01,
                 ),
@@ -98,8 +84,13 @@ class AddNewTaskButton extends StatelessWidget {
                     ActionButton(
                       dialog: dialog,
                       eventOnTap: () {
-                        dialog.dissmiss();
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              buildAddTaskWidget(context),
+                        );
                       },
+                      // textShown: 'Close',
                       textShown: 'Add new task',
                       width: width,
                       height: height,
@@ -115,20 +106,25 @@ class AddNewTaskButton extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: height * .01),
-                  child: AnimatedButton(
-                      isFixedWidth: false,
-                      buttonTextStyle: TextStyle(
-                          color: Theme.of(context).accentColor, fontSize: 14),
-                      buttonDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                          color: Theme.of(context).dividerColor),
-                      text: 'Close',
-                      pressEvent: () {
-                        dialog.dissmiss();
-                      }),
-                ),
+                // Container(
+                //   margin: EdgeInsets.only(top: height * .01),
+                //   child: AnimatedButton(
+                //     isFixedWidth: false,
+                //     buttonTextStyle: TextStyle(
+                //         color: Theme.of(context).accentColor, fontSize: 14),
+                //     buttonDecoration: BoxDecoration(
+                //         borderRadius: BorderRadius.all(Radius.circular(100)),
+                //         color: Theme.of(context).dividerColor),
+                //     text: 'Add new task',
+                //     pressEvent: () {
+                //       showDialog(
+                //         context: context,
+                //         builder: (BuildContext context) =>
+                //             buildAddTaskWidget(context),
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -136,6 +132,24 @@ class AddNewTaskButton extends StatelessWidget {
       },
     );
   }
+}
+
+Widget buildAddTaskWidget(BuildContext context) {
+  return Material(
+    elevation: 0,
+    color: Colors.blueGrey.withAlpha(40),
+    child: TextFormField(
+      autofocus: true,
+      keyboardType: TextInputType.multiline,
+      maxLengthEnforced: true,
+      maxLines: null,
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        labelText: 'task',
+        prefixIcon: Icon(Icons.text_fields),
+      ),
+    ),
+  );
 }
 
 class ActionButton extends StatelessWidget {

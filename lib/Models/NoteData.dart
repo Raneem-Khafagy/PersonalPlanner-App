@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
 class NoteData {
-  final String headLine;
-  final String details;
+  final String title;
+  final String description;
+  final noteId;
 
-  NoteData(
-    @required this.headLine,
-    @required this.details,
-  );
+  NoteData({
+    @required this.title,
+    @required this.description,
+    this.noteId,
+  });
 }
