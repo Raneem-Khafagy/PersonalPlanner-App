@@ -14,6 +14,8 @@ class NotesHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    Provider.of<NoteProvider>(context, listen: false).notesWidgetsList();
+    Widget cards = Provider.of<NoteProvider>(context, listen: false).noteCards;
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: Stack(
@@ -64,8 +66,12 @@ class NotesHomePage extends StatelessWidget {
                   Container(
                     height: height * 0.7,
                     width: width,
-                    child: Provider.of<NoteProvider>(context, listen: false)
-                        .noteCards,
+                    child: (cards == null)
+                        ? cards
+                        : Container(
+                            height: height * 0.7,
+                            width: width,
+                          ),
                   ),
 
                   // Container(

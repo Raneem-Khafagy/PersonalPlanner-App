@@ -116,9 +116,6 @@ class AddNewNoteButton extends StatelessWidget {
                           await Provider.of<NoteProvider>(context,
                                   listen: false)
                               .insertNote(singleNote);
-                          await Provider.of<NoteProvider>(context,
-                                  listen: false)
-                              .notesWidgetsList();
 
                           dialog.dissmiss();
                         },
