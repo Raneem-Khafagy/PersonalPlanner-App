@@ -39,7 +39,7 @@ class AfterSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    final int tranDuration = 200;
+    final int tranDuration = 100;
     return new Scaffold(
       body: Stack(
         children: [
