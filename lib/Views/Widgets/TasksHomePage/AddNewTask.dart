@@ -42,9 +42,7 @@ class AddNewTaskButton extends StatelessWidget {
               ),
             ),
           ),
-
           animType: AnimType.SCALE,
-          //dialogType: DialogType.NO_HEADER,
           keyboardAware: true,
           body: Padding(
             padding: EdgeInsets.symmetric(
