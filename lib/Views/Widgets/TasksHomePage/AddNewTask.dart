@@ -1,19 +1,12 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:myplanner/Models/NoteData.dart';
-import 'package:myplanner/Widgets/AddNew/AddNewTask.dart';
-import 'package:provider/provider.dart';
 
-import 'package:myplanner/Controllers/Provider/Provider.dart';
-
-class AddNewNoteButton extends StatelessWidget {
-  AddNewNoteButton({Key key, this.typeofAdd, this.iconofAdd}) : super(key: key);
+class AddNewTaskButton extends StatelessWidget {
+  const AddNewTaskButton({Key key, this.typeofAdd, this.iconofAdd})
+      : super(key: key);
   final String typeofAdd;
   final iconofAdd;
-  final TextEditingController noteTitle = TextEditingController();
-  final TextEditingController noteDiscription = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +42,7 @@ class AddNewNoteButton extends StatelessWidget {
               ),
             ),
           ),
+
           animType: AnimType.SCALE,
           //dialogType: DialogType.NO_HEADER,
           keyboardAware: true,
@@ -70,7 +64,6 @@ class AddNewNoteButton extends StatelessWidget {
                   child: TextFormField(
                     autofocus: true,
                     minLines: 1,
-                    controller: noteTitle,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       labelText: 'Title',
@@ -81,43 +74,18 @@ class AddNewNoteButton extends StatelessWidget {
                 SizedBox(
                   height: height * 0.01,
                 ),
-                Material(
-                  elevation: 0,
-                  color: Colors.blueGrey.withAlpha(40),
-                  child: TextFormField(
-                    autofocus: true,
-                    keyboardType: TextInputType.multiline,
-                    maxLengthEnforced: true,
-                    maxLines: null,
-                    controller: noteDiscription,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: 'Description',
-                      prefixIcon: Icon(Icons.text_fields),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: height * 0.01,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ActionButton(
                       dialog: dialog,
-                      eventOnTap: () async {
-                        Note singleNote = Note(
-                          noteDescription: noteDiscription.text,
-                          noteTitle: noteTitle.text,
-                          noteDate:
-                              DateFormat.yMMMMd('en_US').format(DateTime.now()),
-                        );
-
-                        await Provider.of<NoteProvider>(context, listen: false)
-                            .insertNote(singleNote);
-
+                      eventOnTap: () {
                         dialog.dissmiss();
                       },
-                      textShown: 'save',
+                      textShown: 'Save',
                       width: width,
                       height: height,
                     ),
@@ -137,6 +105,49 @@ class AddNewNoteButton extends StatelessWidget {
           ),
         )..show();
       },
+    );
+  }
+}
+
+class ActionButton extends StatelessWidget {
+  const ActionButton({
+    Key key,
+    @required this.dialog,
+    @required this.textShown,
+    @required this.eventOnTap,
+    @required this.width,
+    @required this.height,
+  }) : super(key: key);
+  final AwesomeDialog dialog;
+  final String textShown;
+  final Function eventOnTap;
+  final double width;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: width * .02),
+        padding: EdgeInsets.symmetric(
+            horizontal: width * .05, vertical: height * .02),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+            color: Theme.of(context).dividerColor),
+        child: GestureDetector(
+          onTap: eventOnTap,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                textShown,
+                style: TextStyle(
+                    color: Theme.of(context).accentColor, fontSize: 14),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

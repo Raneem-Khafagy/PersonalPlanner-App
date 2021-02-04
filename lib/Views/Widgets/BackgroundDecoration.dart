@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myplanner/Widgets/TodayHomePage/CircularTodayDate.dart';
+import 'package:intl/intl.dart';
+import 'package:myplanner/Controllers/Provider/Themes.dart';
+import 'package:provider/provider.dart';
 
-class HomePageBodyContainer extends StatelessWidget {
+class BackgroundDecoration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

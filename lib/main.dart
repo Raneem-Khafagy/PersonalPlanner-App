@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:myplanner/Views/Screens/TasksHomePage.dart';
 import 'package:provider/provider.dart';
 //screens
-import 'Controllers/Provider/Provider.dart';
-import 'Views/Screens/TodayHomePage.dart';
+import 'Controllers/Provider/Providers.dart';
+import 'Views/Screens/NotesHomePage.dart';
 import 'Controllers/Provider/Themes.dart';
+import 'Views/Screens/HomeScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<PageProvider>(create: (_) => PageProvider()),
     ChangeNotifierProvider<NoteProvider>(create: (_) => NoteProvider()),
     ChangeNotifierProvider<ThemeNotifier>(create: (_) => ThemeNotifier()),
   ], child: MyPlanner()));
@@ -23,9 +26,11 @@ class MyPlanner extends StatelessWidget {
       title: 'MyPlanner',
       theme: themeNotifier.themeData,
       routes: {
-        '/TodayHomePage': (context) => TodayHomePage(),
+        '/NotesHomePage': (context) => NotesHomePage(),
+        '/TasksHomePage': (context) => TasksHomePage(),
+        '/HomeScreen': (context) => HomeScreen(),
       },
-      home: TodayHomePage(),
+      home: HomeScreen(),
     );
   }
 }

@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:myplanner/Widgets/AddNew/AddNewNote.dart';
-import 'package:myplanner/Widgets/AddNew/AddNewTask.dart';
+import 'package:intl/intl.dart';
 
 class CircularTodayDate extends StatelessWidget {
   final String date = DateFormat.yMMMMd('en_US').format(DateTime.now());
@@ -44,7 +41,6 @@ class CircularTodayDate extends StatelessWidget {
                         style: TextStyle(
                           color: Theme.of(context).accentColor,
                           fontSize: 61,
-                          //fontSize: height * 0.09,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -64,69 +60,7 @@ class CircularTodayDate extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              width: width * .4,
-              child: AddNewNoteButton(
-                typeofAdd: 'new note',
-                iconofAdd: (CupertinoIcons.square_pencil),
-              ),
-            ),
-            Container(
-              width: width * .4,
-              child: AddNewTaskButton(
-                typeofAdd: 'new to do list',
-                iconofAdd: (CupertinoIcons.list_bullet),
-              ),
-            ),
-            // AddNewWidget(
-            //   width: width,
-            //   height: height,
-            //   typeofAdd: "Add new task",
-            // ),
-          ],
-        ),
       ],
-    );
-  }
-}
-
-class AddNewWidget extends StatelessWidget {
-  const AddNewWidget({
-    Key key,
-    @required this.typeofAdd,
-    @required this.width,
-    @required this.height,
-  }) : super(key: key);
-
-  final double width;
-  final double height;
-  final String typeofAdd;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: width * .03, vertical: height * .007),
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(
-            Icons.add,
-            color: Theme.of(context).accentColor,
-          ),
-          Text(
-            typeofAdd,
-            style: TextStyle(),
-          ),
-        ],
-      ),
     );
   }
 }

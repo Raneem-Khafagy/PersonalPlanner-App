@@ -1,6 +1,5 @@
 import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
-import 'package:myplanner/Models/NoteData.dart';
 
 class NoteWidget extends StatelessWidget {
   const NoteWidget({

@@ -1,14 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myplanner/Controllers/Provider/Themes.dart';
 import 'package:provider/provider.dart';
 
-class HomePageHeader extends StatelessWidget {
+class Header extends StatelessWidget {
   var currentDate = DateTime.now();
   DateTime selectedDate;
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    //double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final themeNotifier = Provider.of<ThemeNotifier>(context, listen: false);
     void _datePicker() {
@@ -22,11 +21,10 @@ class HomePageHeader extends StatelessWidget {
       });
     }
 
-    return Container(
-      child: Flexible(
-        flex: 1,
-        child: Container(
-          height: height,
+    return Column(
+      children: [
+        Container(
+          height: height * 0.1,
           padding: EdgeInsets.all(height * 0.035),
           alignment: Alignment.topCenter,
           child: Row(
@@ -48,7 +46,7 @@ class HomePageHeader extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }

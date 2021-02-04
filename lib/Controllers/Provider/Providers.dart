@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:myplanner/Models/NoteData.dart';
-import 'package:myplanner/Widgets/note.dart';
+import 'package:myplanner/Views/Widgets/NotesHomePage/note.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'dart:async';
+
+class PageProvider with ChangeNotifier {
+  int pageNumber = 0;
+
+  PageController pageController = PageController();
+
+  void changePage(newPageNumber) {
+    pageNumber = newPageNumber;
+    notifyListeners();
+  }
+}
 
 class NoteProvider with ChangeNotifier {
   List<Widget> notesDisplayed;
   List<Note> notesDatabase;
   Widget singleNoteData;
-  Future<List<Widget>> widgetGenerator(notesDatabase) async {
-    for (var i = 0; i > notesDatabase.length; i++) {
-      singleNoteData = NoteWidget(
-        noteDescription: notesDatabase[i]['noteDescription'],
-        noteTitle: notesDatabase[i]['noteTitle'],
-        noteDate: notesDatabase[i]['noteDate'],
-      );
-      notesDisplayed.add(singleNoteData);
-    }
-  }
 
   Future<Database> accessDatabase() async {
     final Database database = await openDatabase(
@@ -50,7 +51,7 @@ class NoteProvider with ChangeNotifier {
     );
   }
 
-  Future retrieveNotes() async {
+  Future<List<Note>> retrieveNotes() async {
     // Get a reference to the database.
     final Database db = await accessDatabase();
 
@@ -62,7 +63,7 @@ class NoteProvider with ChangeNotifier {
     notesDatabase = List.generate(
       maps.length,
       (i) {
-        return Note(
+        Note(
           noteId: maps[i]['noteId'],
           noteTitle: maps[i]['noteTitle'],
           noteDate: maps[i]['noteDate'],
@@ -72,5 +73,20 @@ class NoteProvider with ChangeNotifier {
     );
 
     return notesDatabase;
+  }
+
+  Future<List<Widget>> notesWidgetsList() async {
+    print("retrieveNotes");
+    await retrieveNotes();
+    for (var i = 0; i > notesDatabase.length; i++) {
+      singleNoteData = NoteWidget(
+        noteDescription: notesDatabase[i].noteDescription,
+        noteTitle: notesDatabase[i].noteDate,
+        noteDate: notesDatabase[i].noteDate,
+      );
+      notesDisplayed.add(singleNoteData);
+    }
+    ;
+    return notesDisplayed;
   }
 }
