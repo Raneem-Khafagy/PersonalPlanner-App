@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myplanner/Controllers/Provider/Themes.dart';
+import 'package:myplanner/Controllers/Themes.dart';
 import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
@@ -21,30 +21,34 @@ class Header extends StatelessWidget {
       });
     }
 
-    return Column(
+    return Stack(
       children: [
-        Container(
-          height: height * 0.1,
-          padding: EdgeInsets.all(height * 0.035),
-          alignment: Alignment.topCenter,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.calendar_today,
-                ),
-                onPressed: _datePicker,
+        Column(
+          children: [
+            Container(
+              height: height * 0.1,
+              padding: EdgeInsets.all(height * 0.035),
+              alignment: Alignment.topCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.calendar_today,
+                    ),
+                    onPressed: _datePicker,
+                  ),
+                  IconButton(
+                    icon: Icon(themeNotifier.iconTheme),
+                    onPressed: () {
+                      themeNotifier.darkorlight = !(themeNotifier.darkorlight);
+                      themeNotifier.setTheme(themeNotifier.darkorlight);
+                    },
+                  ),
+                ],
               ),
-              IconButton(
-                icon: Icon(themeNotifier.iconTheme),
-                onPressed: () {
-                  themeNotifier.darkorlight = !(themeNotifier.darkorlight);
-                  themeNotifier.setTheme(themeNotifier.darkorlight);
-                },
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myplanner/Controllers/Provider/Providers.dart';
+import 'package:myplanner/Controllers/Providers.dart';
 import 'package:myplanner/Views/Widgets/BackgroundDecoration.dart';
 import 'package:myplanner/Views/Widgets/CircularTodayDate.dart';
 import 'package:myplanner/Views/Widgets/Header.dart';
@@ -27,7 +27,7 @@ class TasksHomePage extends StatelessWidget {
           CircularTodayDate(),
           Positioned(
             top: height * .23,
-            height: height * .77,
+            height: height * 0.5,
             width: width,
             child: Center(
               child: Column(

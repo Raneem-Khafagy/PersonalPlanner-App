@@ -1,10 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myplanner/Controllers/Provider/Providers.dart';
+import 'package:myplanner/Controllers/Providers.dart';
 import 'package:myplanner/Views/Screens/NotesHomePage.dart';
 import 'package:myplanner/Views/Screens/TasksHomePage.dart';
-import 'package:myplanner/Views/Widgets/bottomNavigationBar.dart';
+import 'package:myplanner/Views/Widgets/BackgroundDecoration.dart';
+import 'package:myplanner/Views/Widgets/CircularTodayDate.dart';
+import 'package:myplanner/Views/Widgets/Header.dart';
 
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -41,7 +43,17 @@ class AfterSplash extends StatelessWidget {
     return new Scaffold(
       body: Stack(
         children: [
-          new PageView(
+          Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              children: [
+                Header(),
+                BackgroundDecoration(),
+              ],
+            ),
+          ),
+          CircularTodayDate(),
+          PageView(
             controller: Provider.of<PageProvider>(context).pageController,
             onPageChanged: (newPage) {
               Provider.of<PageProvider>(context, listen: false)

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myplanner/Views/Screens/TasksHomePage.dart';
 import 'package:provider/provider.dart';
 //screens
-import 'Controllers/Provider/Providers.dart';
+import 'Controllers/Providers.dart';
 import 'Views/Screens/NotesHomePage.dart';
-import 'Controllers/Provider/Themes.dart';
+import 'Controllers/Themes.dart';
 import 'Views/Screens/HomeScreen.dart';
 
 void main() {

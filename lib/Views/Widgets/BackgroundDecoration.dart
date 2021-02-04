@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myplanner/Controllers/Provider/Themes.dart';
+import 'package:myplanner/Controllers/Themes.dart';
 import 'package:provider/provider.dart';
 
 class BackgroundDecoration extends StatelessWidget {

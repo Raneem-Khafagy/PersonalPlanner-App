@@ -6,7 +6,7 @@ import 'package:myplanner/Models/NoteData.dart';
 import 'package:myplanner/Views/Widgets/TasksHomePage/AddNewTask.dart';
 import 'package:provider/provider.dart';
 
-import 'package:myplanner/Controllers/Provider/Providers.dart';
+import 'package:myplanner/Controllers/Providers.dart';
 
 class AddNewNoteButton extends StatelessWidget {
   AddNewNoteButton({Key key, this.typeofAdd, this.iconofAdd}) : super(key: key);
@@ -116,6 +116,9 @@ class AddNewNoteButton extends StatelessWidget {
                           await Provider.of<NoteProvider>(context,
                                   listen: false)
                               .insertNote(singleNote);
+                          await Provider.of<NoteProvider>(context,
+                                  listen: false)
+                              .notesWidgetsList();
 
                           dialog.dissmiss();
                         },

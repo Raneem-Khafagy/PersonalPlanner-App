@@ -19,6 +19,7 @@ class PageProvider with ChangeNotifier {
 class NoteProvider with ChangeNotifier {
   List<Widget> notesDisplayed;
   List<Note> notesDatabase;
+  ListView noteCards;
   Widget singleNoteData;
 
   Future<Database> accessDatabase() async {
@@ -51,6 +52,35 @@ class NoteProvider with ChangeNotifier {
     );
   }
 
+  Future<void> updateNote(Note note) async {
+    Database db = await accessDatabase();
+
+    await db.update(
+      'notes',
+      note.toMap(),
+      // Ensure that the Dog has a matching id.
+      where: "noteId = ?",
+      // Pass the note's id as a whereArg to prevent SQL injection.
+      whereArgs: [note.noteId],
+    );
+
+    notifyListeners();
+  }
+
+  // Future<void> deleteNote(int id) async {
+  //   // Get a reference to the database.
+  //   Database db = await accessDatabase();
+  //   // Remove the Dog from the database.
+  //   await db.delete(
+  //     'notes',
+  //     // Use a `where` clause to delete a specific note.
+  //     where: "noteId = ?",
+  //     // Pass the Dog's id as a whereArg to prevent SQL injection.
+  //     whereArgs: [notes.noteId],
+  //   );
+  //   notifyListeners();
+  // }
+
   Future<List<Note>> retrieveNotes() async {
     // Get a reference to the database.
     final Database db = await accessDatabase();
@@ -63,7 +93,7 @@ class NoteProvider with ChangeNotifier {
     notesDatabase = List.generate(
       maps.length,
       (i) {
-        Note(
+        return Note(
           noteId: maps[i]['noteId'],
           noteTitle: maps[i]['noteTitle'],
           noteDate: maps[i]['noteDate'],
@@ -75,18 +105,24 @@ class NoteProvider with ChangeNotifier {
     return notesDatabase;
   }
 
-  Future<List<Widget>> notesWidgetsList() async {
+  Future<ListView> notesWidgetsList() async {
     print("retrieveNotes");
-    await retrieveNotes();
+    notesDatabase = await retrieveNotes();
     for (var i = 0; i > notesDatabase.length; i++) {
       singleNoteData = NoteWidget(
+        noteId: notesDatabase[i].noteId,
         noteDescription: notesDatabase[i].noteDescription,
         noteTitle: notesDatabase[i].noteDate,
         noteDate: notesDatabase[i].noteDate,
       );
       notesDisplayed.add(singleNoteData);
     }
-    ;
-    return notesDisplayed;
+    noteCards = ListView(
+      scrollDirection: Axis.vertical,
+      children: notesDisplayed,
+    );
+
+    notifyListeners();
+    return noteCards;
   }
 }

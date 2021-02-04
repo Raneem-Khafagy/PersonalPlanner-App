@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myplanner/Controllers/Provider/Providers.dart';
+import 'package:myplanner/Controllers/Providers.dart';
 import 'package:provider/provider.dart';
 
 class MyBottomNavigationBar extends StatelessWidget {
