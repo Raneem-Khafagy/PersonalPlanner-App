@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+// import 'package:myplanner/Widgets/TodayHomePage/BottomNavigationBar.dart';
 import 'package:myplanner/Widgets/TodayHomePage/CircularTodayDate.dart';
 
 //Screans
@@ -26,13 +30,14 @@ class TodayHomePage extends StatelessWidget {
             ],
           ),
           CircularTodayDate(),
-          // Note(
-          //   height: height,
-          //   width: width,
-          //   title: 'Title',
-          //   description:
-          //       'description goes over here ! description goes over here !description goes over here !description goes over here !description goes over here !description goes over here !',
-          // ),
+          Positioned(
+            top: height * .3,
+            height: height * 0.7,
+            width: width,
+            child: Center(
+              child: ListView(children: []),
+            ),
+          ),
         ],
       ),
     );
