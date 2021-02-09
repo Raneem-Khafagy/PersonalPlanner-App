@@ -4,27 +4,29 @@ import 'package:flutter/widgets.dart';
 
 class Task {
   Task(
-      {@required this.tasktitle,
-      this.taskisChecked = false,
-      this.taskreminderDate,
+      {@required this.taskTitle,
+      //1 -> cheacked , 0->not checked
+      this.taskIsChecked = 0,
+      this.taskReminderDate,
       this.taskId});
 
-  final String tasktitle;
-  bool taskisChecked;
-  final DateTime taskreminderDate;
+  final String taskTitle;
+  int taskIsChecked;
+  final DateTime taskReminderDate;
   final int taskId;
 
   void toggleCheck() {
-    taskisChecked = !taskisChecked;
+    if (taskIsChecked == 0)
+      taskIsChecked = 1;
+    else if (taskIsChecked == 1) taskIsChecked = 0;
   }
 
-  // Convert a taskData into a Map. The keys correspondS to the names of the columns in the database.
   Map<String, dynamic> toMap() {
     return {
-      'tasktitle': tasktitle,
-      'taskisChecked': taskisChecked,
-      "reminderDate":
-          taskreminderDate != null ? taskreminderDate.toString() : null,
+      'taskTitle': taskTitle,
+      'taskIsChecked': taskIsChecked,
+      "taskReminderDate":
+          taskReminderDate != null ? taskReminderDate.toString() : null,
       'taskId': taskId,
     };
   }
