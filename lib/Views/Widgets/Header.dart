@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 class Header extends StatelessWidget {
   var currentDate = DateTime.now();
   DateTime selectedDate;
+  final Widget AddWidget;
+
+  Header({Key key, this.AddWidget}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     //double width = MediaQuery.of(context).size.width;
@@ -32,12 +35,13 @@ class Header extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.calendar_today,
-                    ),
-                    onPressed: _datePicker,
-                  ),
+                  AddWidget,
+                  // IconButton(
+                  //   icon: Icon(
+                  //     Icons.calendar_today,
+                  //   ),
+                  //   onPressed: _datePicker,
+                  // ),
                   IconButton(
                     icon: Icon(themeNotifier.iconTheme),
                     onPressed: () {

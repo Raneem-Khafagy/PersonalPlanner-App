@@ -19,18 +19,19 @@ class HomeScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Container(
       child: new SplashScreen(
-          seconds: 2,
-          navigateAfterSeconds: new AfterSplash(),
-          title: Text('My Planner App'),
-          image: Image.asset('Images/planner.png'),
-          backgroundColor: Theme.of(context).backgroundColor,
-          styleTextUnderTheLoader: TextStyle(
-            color: Theme.of(context).accentColor,
-            fontSize: 61,
-            fontWeight: FontWeight.bold,
-          ),
-          photoSize: height * 0.3,
-          loaderColor: Theme.of(context).accentColor),
+        seconds: 2,
+        navigateAfterSeconds: new AfterSplash(),
+        title: Text('My Planner App'),
+        image: Image.asset('Images/planner.png'),
+        backgroundColor: Theme.of(context).backgroundColor,
+        styleTextUnderTheLoader: TextStyle(
+          color: Theme.of(context).accentColor,
+          fontSize: 61,
+          fontWeight: FontWeight.bold,
+        ),
+        photoSize: height * 0.3,
+      ),
+      // loaderColor: Theme.of(context).accentColor),
     );
   }
 }
@@ -43,16 +44,6 @@ class AfterSplash extends StatelessWidget {
     return new Scaffold(
       body: Stack(
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Column(
-              children: [
-                Header(),
-                BackgroundDecoration(),
-              ],
-            ),
-          ),
-          CircularTodayDate(),
           PageView(
             controller: Provider.of<PageProvider>(context).pageController,
             onPageChanged: (newPage) {

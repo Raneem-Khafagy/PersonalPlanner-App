@@ -17,10 +17,7 @@ class PageProvider with ChangeNotifier {
 }
 
 class NoteProvider with ChangeNotifier {
-  List<Widget> notesDisplayed;
-  List<Note> notesDatabase;
-  ListView noteCards;
-  Widget singleNoteData;
+  List<Widget> noteCards = [];
 
   Future<Database> accessDatabase() async {
     final Database database = await openDatabase(
@@ -67,30 +64,27 @@ class NoteProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Future<void> deleteNote(int id) async {
-  //   // Get a reference to the database.
-  //   Database db = await accessDatabase();
-  //   // Remove the Dog from the database.
-  //   await db.delete(
-  //     'notes',
-  //     // Use a `where` clause to delete a specific note.
-  //     where: "noteId = ?",
-  //     // Pass the Dog's id as a whereArg to prevent SQL injection.
-  //     whereArgs: [notes.noteId],
-  //   );
-  //   notifyListeners();
-  // }
+  Future<void> deleteNote(int noteId) async {
+    // Get a reference to the database.
+    Database db = await accessDatabase();
+    // Remove the Dog from the database.
+    await db.delete(
+      'notes',
+      // Use a `where` clause to delete a specific note.
+      where: "noteId = ?",
+      // Pass the note's id as a whereArg to prevent SQL injection.
+      whereArgs: [noteId],
+    );
+    notifyListeners();
+  }
 
   Future<List<Note>> retrieveNotes() async {
     // Get a reference to the database.
     final Database db = await accessDatabase();
-
     // Query the table for all The Notes.
     final List<Map<String, dynamic>> maps = await db.query('notes');
-
     // Convert the List<Map<String, dynamic> into a List<Dog>.
-
-    notesDatabase = List.generate(
+    return List.generate(
       maps.length,
       (i) {
         return Note(
@@ -101,28 +95,21 @@ class NoteProvider with ChangeNotifier {
         );
       },
     );
-
-    return notesDatabase;
   }
 
-  Future<ListView> notesWidgetsList() async {
+  Future notesWidgetsList() async {
     print("retrieveNotes");
-    notesDatabase = await retrieveNotes();
+    noteCards.clear();
+    List<Note> notesDatabase = await retrieveNotes();
     for (var i = 0; i > notesDatabase.length; i++) {
-      singleNoteData = NoteWidget(
+      print(notesDatabase[i]);
+      noteCards.add(NoteWidget(
         noteId: notesDatabase[i].noteId,
         noteDescription: notesDatabase[i].noteDescription,
         noteTitle: notesDatabase[i].noteDate,
         noteDate: notesDatabase[i].noteDate,
-      );
-      notesDisplayed.add(singleNoteData);
+      ));
     }
-    noteCards = ListView(
-      scrollDirection: Axis.vertical,
-      children: notesDisplayed,
-    );
-
     notifyListeners();
-    return noteCards;
   }
 }

@@ -20,7 +20,15 @@ class TasksHomePage extends StatelessWidget {
         children: <Widget>[
           Column(
             children: [
-              Header(),
+              Header(
+                AddWidget: Container(
+                  width: width * .12,
+                  child: AddNewTaskButton(
+                    typeofAdd: 'new task',
+                    iconofAdd: (CupertinoIcons.list_bullet),
+                  ),
+                ),
+              ),
               BackgroundDecoration(),
             ],
           ),
@@ -33,7 +41,7 @@ class TasksHomePage extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    width: width * .4,
+                    width: width * .2,
                     child: AddNewTaskButton(
                       typeofAdd: 'new task',
                       iconofAdd: (CupertinoIcons.list_bullet),

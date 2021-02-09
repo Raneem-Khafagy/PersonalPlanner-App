@@ -24,7 +24,8 @@ class AddNewNoteButton extends StatelessWidget {
         buttonTextStyle:
             TextStyle(color: Theme.of(context).accentColor, fontSize: 14),
         icon: Icons.add,
-        text: 'Add ' + typeofAdd,
+        // text: 'Add ' + typeofAdd,
+        text: '',
         color: Theme.of(context).primaryColor,
         pressEvent: () {
           AwesomeDialog dialog;
