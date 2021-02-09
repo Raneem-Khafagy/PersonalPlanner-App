@@ -15,6 +15,7 @@ class NotesHomePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     //  Provider.of<NoteProvider>(context, listen: false).notesWidgetsList();
+
     List<Widget> cards =
         Provider.of<NoteProvider>(context, listen: false).noteCards;
     return Scaffold(
@@ -35,7 +36,9 @@ class NotesHomePage extends StatelessWidget {
               BackgroundDecoration(),
             ],
           ),
-          CircularTodayDate(),
+          CircularTodayDate(
+            typeOfItems: 'Notes',
+          ),
           Positioned(
             top: height * .16,
             height: height * 0.76,
@@ -47,7 +50,6 @@ class NotesHomePage extends StatelessWidget {
                   children: cards,
                 )),
           ),
-
           // Positioned(
           //   top: height * .16,
           //   height: height * 0.76,

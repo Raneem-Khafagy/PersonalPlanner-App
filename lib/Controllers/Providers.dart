@@ -102,11 +102,13 @@ class NoteProvider with ChangeNotifier {
   }
 
   Future notesWidgetsList() async {
-    // noteCards.clear();
+    ///noteCards.clear();
     List<Note> notesDatabase = await retrieveNotes();
-
+    print(notesDatabase);
     for (var i = 0; i > notesDatabase.length; i++) {
-      print('${notesDatabase[i]}');
+      print('////////');
+      print('inside for loop${notesDatabase[i]}');
+      print('////////');
       noteCards.add(NoteWidget(
         noteId: notesDatabase[i].noteId,
         noteDescription: notesDatabase[i].noteDescription,
@@ -114,7 +116,7 @@ class NoteProvider with ChangeNotifier {
         noteDate: notesDatabase[i].noteDate,
       ));
     }
-    print("${noteCards}");
+    //  print(noteCards);
     notifyListeners();
     //return noteCards;
   }

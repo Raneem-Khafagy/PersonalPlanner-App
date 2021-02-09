@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CircularTodayDate extends StatelessWidget {
+  final typeOfItems;
   final String date = DateFormat.yMMMMd('en_US').format(DateTime.now());
   final String day = DateFormat('EEEE').format(DateTime.now());
+
+  CircularTodayDate({Key key, this.typeOfItems}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -50,6 +53,15 @@ class CircularTodayDate extends StatelessWidget {
                         style: TextStyle(
                           color: Color(0xCF9FA4AC),
                           fontSize: 31,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      SizedBox(height: height * 0.01),
+                      Text(
+                        typeOfItems,
+                        style: TextStyle(
+                          color: Color(0xCF9FA4AC),
+                          fontSize: 22,
                           fontWeight: FontWeight.w400,
                         ),
                       ),

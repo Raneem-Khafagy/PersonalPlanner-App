@@ -32,7 +32,9 @@ class TasksHomePage extends StatelessWidget {
               BackgroundDecoration(),
             ],
           ),
-          CircularTodayDate(),
+          CircularTodayDate(
+            typeOfItems: 'Tasks',
+          ),
           // Positioned(
           //   top: height * .23,
           //   height: height * 0.5,
