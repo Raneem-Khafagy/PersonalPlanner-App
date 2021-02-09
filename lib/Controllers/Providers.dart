@@ -42,12 +42,13 @@ class NoteProvider with ChangeNotifier {
     // Get a reference to the database.
     final Database db = await accessDatabase();
     // Insert the noteData into the correct table.
-
     await db.insert(
       'notes',
       note.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    print("insertNote Future");
+    // notifyListeners();
   }
 
   Future<void> updateNote(Note note) async {
@@ -76,6 +77,7 @@ class NoteProvider with ChangeNotifier {
       // Pass the note's id as a whereArg to prevent SQL injection.
       whereArgs: [noteId],
     );
+
     notifyListeners();
   }
 
@@ -85,6 +87,7 @@ class NoteProvider with ChangeNotifier {
     // Query the table for all The Notes.
     final List<Map<String, dynamic>> maps = await db.query('notes');
     // Convert the List<Map<String, dynamic> into a List<Dog>.
+    print("retrieveNotes Future");
     return List.generate(
       maps.length,
       (i) {
@@ -99,11 +102,11 @@ class NoteProvider with ChangeNotifier {
   }
 
   Future notesWidgetsList() async {
-    print("retrieveNotes");
-    noteCards.clear();
+    // noteCards.clear();
     List<Note> notesDatabase = await retrieveNotes();
+
     for (var i = 0; i > notesDatabase.length; i++) {
-      print(i);
+      print('${notesDatabase[i]}');
       noteCards.add(NoteWidget(
         noteId: notesDatabase[i].noteId,
         noteDescription: notesDatabase[i].noteDescription,
@@ -111,9 +114,9 @@ class NoteProvider with ChangeNotifier {
         noteDate: notesDatabase[i].noteDate,
       ));
     }
-    print(noteCards);
+    print("${noteCards}");
     notifyListeners();
-    return noteCards;
+    //return noteCards;
   }
 }
 

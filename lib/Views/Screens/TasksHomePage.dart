@@ -33,24 +33,24 @@ class TasksHomePage extends StatelessWidget {
             ],
           ),
           CircularTodayDate(),
-          Positioned(
-            top: height * .23,
-            height: height * 0.5,
-            width: width,
-            child: Center(
-              child: Column(
-                children: [
-                  Container(
-                    width: width * .2,
-                    child: AddNewTaskButton(
-                      typeofAdd: 'new task',
-                      iconofAdd: (CupertinoIcons.list_bullet),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Positioned(
+          //   top: height * .23,
+          //   height: height * 0.5,
+          //   width: width,
+          //   child: Center(
+          //     child: Column(
+          //       children: [
+          //         Container(
+          //           width: width * .2,
+          //           child: AddNewTaskButton(
+          //             typeofAdd: 'new task',
+          //             iconofAdd: (CupertinoIcons.list_bullet),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

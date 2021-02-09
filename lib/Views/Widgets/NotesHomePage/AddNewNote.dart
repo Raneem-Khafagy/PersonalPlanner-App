@@ -14,7 +14,8 @@ class AddNewNoteButton extends StatelessWidget {
   final iconofAdd;
   final TextEditingController noteTitle = TextEditingController();
   final TextEditingController noteDiscription = TextEditingController();
-
+  String noteDate =
+      DateFormat.yMMMMd('en_US').format(DateTime.now()).toString();
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -107,20 +108,21 @@ class AddNewNoteButton extends StatelessWidget {
                       ActionButton(
                         dialog: dialog,
                         eventOnTap: () async {
-                          Note singleNote = Note(
-                            noteDescription: noteDiscription.text,
-                            noteTitle: noteTitle.text,
-                            noteDate: DateFormat.yMMMMd('en_US')
-                                .format(DateTime.now()),
+                          print(
+                              "textfield debug: ${noteDiscription.text},${noteTitle.text},${noteDate}");
+                          Provider.of<NoteProvider>(context, listen: false)
+                              .insertNote(
+                            Note(
+                              noteDescription: noteDiscription.text,
+                              noteTitle: noteTitle.text,
+                              noteDate: noteDate,
+                            ),
                           );
 
-                          await Provider.of<NoteProvider>(context,
-                                  listen: false)
-                              .insertNote(singleNote);
                           Provider.of<NoteProvider>(context, listen: false)
                               .notesWidgetsList();
-                          dialog.dissmiss();
-                          //  Navigator.pop(context);
+                          //dialog.dissmiss();
+                          Navigator.pop(context);
                         },
                         textShown: 'Save',
                         width: width,
