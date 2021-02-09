@@ -102,7 +102,7 @@ class NoteProvider with ChangeNotifier {
     noteCards.clear();
     List<Note> notesDatabase = await retrieveNotes();
     for (var i = 0; i > notesDatabase.length; i++) {
-      print(notesDatabase[i]);
+      print(i);
       noteCards.add(NoteWidget(
         noteId: notesDatabase[i].noteId,
         noteDescription: notesDatabase[i].noteDescription,
@@ -110,6 +110,8 @@ class NoteProvider with ChangeNotifier {
         noteDate: notesDatabase[i].noteDate,
       ));
     }
+    print(noteCards);
     notifyListeners();
+    return noteCards;
   }
 }

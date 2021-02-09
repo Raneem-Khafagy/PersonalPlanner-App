@@ -14,7 +14,7 @@ class NotesHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    Provider.of<NoteProvider>(context, listen: false).notesWidgetsList();
+    // Provider.of<NoteProvider>(context, listen: false).notesWidgetsList();
     List<Widget> cards =
         Provider.of<NoteProvider>(context, listen: false).noteCards;
     return Scaffold(
