@@ -1,12 +1,26 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:myplanner/Controllers/TaskController.dart';
+import 'package:myplanner/Models/TaskData.dart';
+import 'package:provider/provider.dart';
 
 class AddNewTaskButton extends StatelessWidget {
-  const AddNewTaskButton({Key key, this.typeofAdd, this.iconofAdd})
-      : super(key: key);
+  AddNewTaskButton({Key key, this.typeofAdd, this.iconofAdd}) : super(key: key);
   final String typeofAdd;
   final iconofAdd;
+
+  ////////
+  final taskController = TextEditingController();
+
+  String currTask = '';
+  bool remindMe = false;
+  DateTime reminderDate;
+  TimeOfDay reminderTime;
+  int id;
+
+  ///////
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +75,12 @@ class AddNewTaskButton extends StatelessWidget {
                   elevation: 0,
                   color: Colors.blueGrey.withAlpha(40),
                   child: TextFormField(
+                    controller: taskController,
                     autofocus: true,
                     minLines: 1,
+                    onChanged: (newVal) {
+                      currTask = newVal;
+                    },
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       labelText: 'Title',
@@ -73,6 +91,53 @@ class AddNewTaskButton extends StatelessWidget {
                 SizedBox(
                   height: height * 0.01,
                 ),
+                SwitchListTile(
+                  value: remindMe,
+                  // title: Text('Reminder'),
+                  onChanged: (newValue) async {
+                    if (newValue) {
+                      reminderDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(DateTime.now().year + 2),
+                      );
+
+                      if (reminderDate == null) {
+                        return;
+                      }
+
+                      reminderTime = await showTimePicker(
+                          context: context, initialTime: TimeOfDay.now());
+
+                      if (reminderDate != null && reminderTime != null) {
+                        remindMe = newValue;
+                      }
+                    } else {
+                      reminderDate = null;
+                      reminderTime = null;
+                      remindMe = newValue;
+                    }
+
+                    print(reminderTime);
+                    print(reminderDate);
+                  },
+                  subtitle: Text('Remind me of this task'),
+                ),
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                Container(
+                    child: remindMe
+                        ? Text('Set the reminder at: ' +
+                            DateTime(
+                                    reminderDate.year,
+                                    reminderDate.month,
+                                    reminderDate.day,
+                                    reminderTime.hour,
+                                    reminderTime.minute)
+                                .toString())
+                        : null),
                 SizedBox(
                   height: height * 0.01,
                 ),
@@ -81,10 +146,53 @@ class AddNewTaskButton extends StatelessWidget {
                   children: [
                     ActionButton(
                       dialog: dialog,
-                      eventOnTap: () {
+                      eventOnTap: () async {
+                        if (remindMe) {
+                          var scheduledNotificationDateTime = reminderDate
+                              .add(Duration(
+                                  hours: reminderTime.hour,
+                                  minutes: reminderTime.minute))
+                              .subtract(Duration(seconds: 5));
+                          var androidPlatformChannelSpecifics =
+                              AndroidNotificationDetails(
+                            currTask,
+                            'To Do Notification',
+                            'Do the task',
+                            priority: Priority.max,
+                            importance: Importance.max,
+                            playSound: true,
+                          );
+                          var iOSPlatformChannelSpecifics =
+                              IOSNotificationDetails();
+                          NotificationDetails platformChannelSpecifics =
+                              NotificationDetails(
+                                  android: androidPlatformChannelSpecifics,
+                                  iOS: iOSPlatformChannelSpecifics);
+                          id = Provider.of<TaskData>(context, listen: false)
+                              .tasks
+                              .length;
+                          print(id);
+                          await FlutterLocalNotificationsPlugin();
+                        }
+
+                        Provider.of<TaskData>(
+                          context,
+                          listen: false,
+                        ).addTask(Task(
+                          taskTitle: currTask,
+                          taskIsChecked: false,
+                          taskReminderDate: reminderDate == null
+                              ? null
+                              : reminderDate.add(Duration(
+                                  hours: reminderTime.hour,
+                                  minutes: reminderTime.minute,
+                                )),
+                          taskId: reminderDate != null ? id : null,
+                        ));
+                        // Navigator.pop(context);
                         dialog.dissmiss();
                       },
-                      textShown: 'Save',
+                      textShown: 'Add task',
                       width: width,
                       height: height,
                     ),

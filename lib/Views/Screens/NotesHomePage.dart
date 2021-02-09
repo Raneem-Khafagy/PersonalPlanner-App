@@ -5,7 +5,6 @@ import 'package:myplanner/Views/Widgets/BackgroundDecoration.dart';
 import 'package:myplanner/Views/Widgets/CircularTodayDate.dart';
 import 'package:myplanner/Views/Widgets/Header.dart';
 import 'package:myplanner/Views/Widgets/NotesHomePage/AddNewNote.dart';
-import 'package:myplanner/Views/Widgets/NotesHomePage/note.dart';
 
 import 'package:provider/provider.dart';
 

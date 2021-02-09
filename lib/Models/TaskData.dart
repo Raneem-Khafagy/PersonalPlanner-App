@@ -5,29 +5,24 @@ import 'package:flutter/widgets.dart';
 class Task {
   Task(
       {@required this.taskTitle,
-      //1 -> cheacked , 0->not checked
-      this.taskIsChecked = 0,
+      this.taskIsChecked,
       this.taskReminderDate,
       this.taskId});
 
   final String taskTitle;
-  int taskIsChecked;
+  bool taskIsChecked;
   final DateTime taskReminderDate;
   final int taskId;
 
   void toggleCheck() {
-    if (taskIsChecked == 0)
-      taskIsChecked = 1;
-    else if (taskIsChecked == 1) taskIsChecked = 0;
+    taskIsChecked = !taskIsChecked;
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'taskTitle': taskTitle,
-      'taskIsChecked': taskIsChecked,
-      "taskReminderDate":
-          taskReminderDate != null ? taskReminderDate.toString() : null,
-      'taskId': taskId,
-    };
-  }
+  Map toJson() => {
+        'taskTitle': taskTitle,
+        'taskIsChecked': taskIsChecked,
+        "taskReminderDate":
+            taskReminderDate != null ? taskReminderDate.toString() : null,
+        'taskId': taskId,
+      };
 }

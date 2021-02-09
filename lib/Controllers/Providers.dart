@@ -117,87 +117,87 @@ class NoteProvider with ChangeNotifier {
   }
 }
 
-class TaskProvider with ChangeNotifier {
-  List<Widget> taskCards = [];
+// class TaskProvider with ChangeNotifier {
+//   List<Widget> taskCards = [];
 
-  Future<Database> accessDatabase() async {
-    final Database database = await openDatabase(
-      join(await getDatabasesPath(), 'tasksDatabase.db'),
-      onCreate: (db, version) {
-        return db.execute(
-          "CREATE TABLE tasks(taskId INTEGER PRIMARY KEY, taskTitle TEXT,taskIsChecked INTEGER,taskReminderDate TEXT)",
-        );
-      },
-      version: 1,
-    );
-    return database;
-  }
+//   Future<Database> accessDatabase() async {
+//     final Database database = await openDatabase(
+//       join(await getDatabasesPath(), 'tasksDatabase.db'),
+//       onCreate: (db, version) {
+//         return db.execute(
+//           "CREATE TABLE tasks(taskId INTEGER PRIMARY KEY, taskTitle TEXT,taskIsChecked INTEGER,taskReminderDate TEXT)",
+//         );
+//       },
+//       version: 1,
+//     );
+//     return database;
+//   }
 
-  Future<void> insertTask(Task task) async {
-    final Database db = await accessDatabase();
-    await db.insert(
-      'tasks',
-      task.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-  }
+//   Future<void> insertTask(Task task) async {
+//     final Database db = await accessDatabase();
+//     await db.insert(
+//       'tasks',
+//       task.toMap(),
+//       conflictAlgorithm: ConflictAlgorithm.replace,
+//     );
+//   }
 
-  Future<void> updateTask(Task task) async {
-    Database db = await accessDatabase();
-    await db.update(
-      'tasks',
-      task.toMap(),
-      where: "taskId = ?",
-      whereArgs: [task.taskId],
-    );
+//   Future<void> updateTask(Task task) async {
+//     Database db = await accessDatabase();
+//     await db.update(
+//       'tasks',
+//       task.toMap(),
+//       where: "taskId = ?",
+//       whereArgs: [task.taskId],
+//     );
 
-    notifyListeners();
-  }
+//     notifyListeners();
+//   }
 
-  Future<void> deleteTask(Task taskId) async {
-    Database db = await accessDatabase();
-    await db.delete(
-      'tasks',
-      where: "taskId = ?",
-      whereArgs: [taskId],
-    );
-    notifyListeners();
-  }
+//   Future<void> deleteTask(Task taskId) async {
+//     Database db = await accessDatabase();
+//     await db.delete(
+//       'tasks',
+//       where: "taskId = ?",
+//       whereArgs: [taskId],
+//     );
+//     notifyListeners();
+//   }
 
-  Future<List<Note>> retrieveNotes() async {
-    // Get a reference to the database.
-    final Database db = await accessDatabase();
-    // Query the table for all The Notes.
-    final List<Map<String, dynamic>> maps = await db.query('notes');
-    // Convert the List<Map<String, dynamic> into a List<Dog>.
-    return List.generate(
-      maps.length,
-      (i) {
-        return Note(
-          noteId: maps[i]['noteId'],
-          noteTitle: maps[i]['noteTitle'],
-          noteDate: maps[i]['noteDate'],
-          noteDescription: maps[i]['noteDescription'],
-        );
-      },
-    );
-  }
+//   Future<List<Note>> retrieveNotes() async {
+//     // Get a reference to the database.
+//     final Database db = await accessDatabase();
+//     // Query the table for all The Notes.
+//     final List<Map<String, dynamic>> maps = await db.query('notes');
+//     // Convert the List<Map<String, dynamic> into a List<Dog>.
+//     return List.generate(
+//       maps.length,
+//       (i) {
+//         return Note(
+//           noteId: maps[i]['noteId'],
+//           noteTitle: maps[i]['noteTitle'],
+//           noteDate: maps[i]['noteDate'],
+//           noteDescription: maps[i]['noteDescription'],
+//         );
+//       },
+//     );
+//   }
 
-  Future notesWidgetsList() async {
-    print("retrieveNotes");
-    taskCards.clear();
-    List<Note> notesDatabase = await retrieveNotes();
-    for (var i = 0; i > notesDatabase.length; i++) {
-      print(i);
-      taskCards.add(NoteWidget(
-        noteId: notesDatabase[i].noteId,
-        noteDescription: notesDatabase[i].noteDescription,
-        noteTitle: notesDatabase[i].noteDate,
-        noteDate: notesDatabase[i].noteDate,
-      ));
-    }
-    print(taskCards);
-    notifyListeners();
-    return taskCards;
-  }
-}
+//   Future notesWidgetsList() async {
+//     print("retrieveNotes");
+//     taskCards.clear();
+//     List<Note> notesDatabase = await retrieveNotes();
+//     for (var i = 0; i > notesDatabase.length; i++) {
+//       print(i);
+//       taskCards.add(NoteWidget(
+//         noteId: notesDatabase[i].noteId,
+//         noteDescription: notesDatabase[i].noteDescription,
+//         noteTitle: notesDatabase[i].noteDate,
+//         noteDate: notesDatabase[i].noteDate,
+//       ));
+//     }
+//     print(taskCards);
+//     notifyListeners();
+//     return taskCards;
+//   }
+// }
