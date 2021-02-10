@@ -108,9 +108,10 @@ class AddNewNoteButton extends StatelessWidget {
                       ActionButton(
                         dialog: dialog,
                         eventOnTap: () async {
-                          print(
-                              "textfield debug: ${noteDiscription.text},${noteTitle.text},${noteDate}");
-                          Provider.of<NoteProvider>(context, listen: false)
+                          // print(
+                          //     "textfield debug: ${noteDiscription.text},${noteTitle.text},${noteDate}");
+                          await Provider.of<NoteProvider>(context,
+                                  listen: false)
                               .insertNote(
                             Note(
                               noteDescription: noteDiscription.text,
@@ -119,10 +120,13 @@ class AddNewNoteButton extends StatelessWidget {
                             ),
                           );
 
-                          Provider.of<NoteProvider>(context, listen: false)
+                          await Provider.of<NoteProvider>(context,
+                                  listen: false)
                               .notesWidgetsList();
-                          //dialog.dissmiss();
-                          Navigator.pop(context);
+                          noteDiscription.clear();
+                          noteTitle.clear();
+                          dialog.dissmiss();
+                          // Navigator.pop(context);
                         },
                         textShown: 'Save',
                         width: width,

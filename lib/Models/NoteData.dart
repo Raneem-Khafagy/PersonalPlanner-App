@@ -28,6 +28,6 @@ class Note {
   // Implement toString to make it easier to see information about each note
   @override
   String toString() {
-    return 'Note{noteTitle: $noteTitle, noteDescription: $noteDescription, noteDate: $noteDate,noteId: $noteId}';
+    return 'Note{noteTitle: ${noteTitle}, noteDescription: ${noteDescription}, noteDate: ${noteDate},noteId: ${noteId}}';
   }
 }

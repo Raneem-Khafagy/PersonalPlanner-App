@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:myplanner/Controllers/Providers.dart';
 import 'package:myplanner/Views/Screens/NotesHomePage.dart';
 import 'package:myplanner/Views/Screens/TasksHomePage.dart';
-import 'package:myplanner/Views/Widgets/BackgroundDecoration.dart';
-import 'package:myplanner/Views/Widgets/CircularTodayDate.dart';
-import 'package:myplanner/Views/Widgets/Header.dart';
 
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -16,6 +13,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<NoteProvider>(context, listen: false).notesWidgetsList();
     double height = MediaQuery.of(context).size.height;
     return Container(
       child: new SplashScreen(

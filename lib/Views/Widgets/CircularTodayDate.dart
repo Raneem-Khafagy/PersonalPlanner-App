@@ -60,8 +60,8 @@ class CircularTodayDate extends StatelessWidget {
                       Text(
                         typeOfItems,
                         style: TextStyle(
-                          color: Color(0xCF9FA4AC),
-                          fontSize: 22,
+                          color: Theme.of(context).accentColor,
+                          fontSize: 28,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
