@@ -110,8 +110,7 @@ class AddNewNoteButton extends StatelessWidget {
                         eventOnTap: () async {
                           // print(
                           //     "textfield debug: ${noteDiscription.text},${noteTitle.text},${noteDate}");
-                          await Provider.of<NoteProvider>(context,
-                                  listen: false)
+                          Provider.of<NoteProvider>(context, listen: false)
                               .insertNote(
                             Note(
                               noteDescription: noteDiscription.text,
@@ -120,8 +119,7 @@ class AddNewNoteButton extends StatelessWidget {
                             ),
                           );
 
-                          await Provider.of<NoteProvider>(context,
-                                  listen: false)
+                          Provider.of<NoteProvider>(context, listen: false)
                               .notesWidgetsList();
                           noteDiscription.clear();
                           noteTitle.clear();
